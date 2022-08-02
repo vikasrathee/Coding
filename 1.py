@@ -32,8 +32,16 @@ class HashTable:
 
 
         
-    def search(self, value):\
-        pass
+    def find(self, key):
+        index = self.get_hash(key)
+
+        node = self.slots[index]
+
+        
+
+        if node is None:
+            return False
+        
 
     def get_hash(self, value):
         return value % self.capacity

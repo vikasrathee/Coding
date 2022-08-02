@@ -53,7 +53,8 @@ c = A.pop(-1)
 print(c)
 print(A)
 
-
+a = [[y for x in range(10)] for y in range(2)]
+print(a)
 
 
 
