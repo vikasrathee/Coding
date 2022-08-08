@@ -4,8 +4,13 @@
 # Max(Avg) in subarray of size k
 
 from collections import deque
+import heapq
+from locale import nl_langinfo
+from multiprocessing.sharedctypes import Value
 from queue import Queue
 from unittest.mock import NonCallableMagicMock
+from unittest.util import sorted_list_difference
+from xml.dom import minicompat
 
 
 def maxavg_subarray(arr, k):    
@@ -219,45 +224,184 @@ def path_sum(root, sum):
 
 # Two heap
 # find median in a data stream.
-
+from heapq import *
 
 class Stream:
 
     def __init__(self) -> None:
-        
-        pass
-
+        self.min_heap = [] # two half of the stream seen so far.
+        self.max_heap = []
 
     def addNum(self, num) -> None :
-        pass
+        if not self.max_heap and -self.max_heap[0] >= num:
+            heappush(self.max_heap, -num)
+        else:
+            heappush(self.min_heap, num)
+        
+        if len(self.max_heap) > len(self.min_heap) + 1:
+            heappush(self.min_heap, heappop(self.max_heap))
+        elif len(self.max_heap) + 1 < len(self.min_heap):
+            heappush(self.max_heap, -heappop(self.min_heap))
 
     def find_median(self) -> int:
-        pass
+        if len(self.min_heap) == len(self.max_heap):
+            return (-self.max_heap[0] + self.min_heap[0]) / 2
+        else: 
+            return -self.max_heap[0]
 
 
+#### Subsets
+# Find all possible combinations or Power Set.
 
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+def power_set(nums):
+    result = [[]]
     
+    for x in nums:
+        print(result)
+        for i in range(len(result)):
+            result.append(result[i] + [x])
+        
+    return result
+
+
+
+def bst(nums, target):
+    low = 0
+    high = len(nums)
+
+    while low < high:
+        mid = (low + high) // 2
+
+        if nums[mid] == target:
+            return mid
+    
+        elif nums[mid] > target:
+            high = mid
+
+        else:
+            low = mid
+    
+    return -1
+
+
+
+## Top k numbers
+
+# Kth largest element in the array
+ # Idea is to use heap to keep track of the k largest values. minheap wil do it.
+
+def k_largest(arr, k):
+    minheal = []
+    count = 0
+
+    for i in range(arr):
+        if count < k:
+            heappush(minheap, num[i])
+            count += 1
+        else:
+            if minheap[0] < num[i]:
+                heappop(minheap)
+                heappush(minheap, num[i])
+    
+    return minheap[0]
+
+#### K way merge algorithm
+# Merge k sorted list:
+
+
+
+
+class linkedlist:
+    def __init__(self, Value) -> None:
+        self.val = Value
+        self.next = None
+
+    def __lt__(self, other):
+        return self.val < other.val
+
+
+class Solution:
+
+    def k_way_merge(self, list):
+        min_heap = []
+
+        for root in list:
+            if root is not None:
+                heappush(min_heap, root)
+                
+        head = min_heap[0]
+        tail = min_heap[0]
+
+        while min_heap:
+            
+            tail = min_heap[0].next
+            heappushpop(next)
+            head.next =  min_heap[0]
+        
+        return head
+
+
+### 0/1 Knapsack
+#Return type bool
+#[1,5, 11, 5]
+
+#Answer:
+#[1,5,5], [11]
+
+
+# find one subset which shows ad with elements = sum/2
+def can_partition(arr):
+    sum = 0
+    for num in arr:
+        sum += num
+    
+    if sum %2 != 0:
+        return False
+    
+    return can_partition_recursive(arr, sum/2, 0)
+
+def can_partition_recursive(nums, sum, current_index):
+    if sum == 0:
+        return True
+
+    if len(nums) == 0 or current_index >= len(nums):
+        return False
+
+    if nums[current_index] <= sum:
+        if can_partition_recursive(nums, sum - nums[current_index], current_index+1):
+            return True
+
+    return can_partition_recursive(nums, sum, current_index+1)
+    
+    
+
+##### Courses:
+def if_courses_possible(self, numCourses: int, preReq: list[list[int]] ) -> bool:
+
+    graph = {i: [] for i in numCourses}
+    in_degree = {i: 0 for i in numCourses}
+    
+    for pre in preReq:
+        graph[pre[0]].append(pre[1])
+        in_degree[pre[0]] += 1
+
+    source = []
+    for vertex in in_degree.keys:
+        if in_degree[vertex] == 0:
+            source.append(vertex)
+
+    sorted_list = []
+    while source:
+        vertex = source.pop[0]
+        sorted_list.append(vertex)
+        for child in graph[vertex]:
+            in_degree[child] -= 1
+            if in_degree[child] == 0:
+                source.append(child)
+    
+    return len(sorted_list) == numCourses
+
+
+### Staircase
+# 
+
