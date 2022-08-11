@@ -8,38 +8,26 @@ def swap(A, x, y):
     ### Alternative way
     (A[x], A[y]) = (A[y], A[x])
 
+## Bubble Sort
+# Bubble which are now values moving to start for increasing sort order 
 def bubble_sort(A):
-    swapped = True
-   
-    for pas in range(len(A)):
-        print(A)
-
-        if not swapped:
-            return
-        swapped = False
-        
-        print(f"iteration {pas}")
-
-        for i in range(len(A)-pas - 1):
-            print(A[i], A[i+1])
-
+    swap = True
+    for iter in range(len(A)):
+        if not swap:
+            return 
+        swap = False
+        for i in range(len(A) - iter - 1):
             if A[i] > A[i+1]:
-                swapped = True
-                swap(A,i, i+1)
-            
-            print(A[i], A[i+1])
+                swap = True
+                A[i], A[i+1] = A[i + 1], A[i] 
 
-
-
+## Selection Sort       
 # array = sorted_part + unsorted_part
 def selection_sort(A):
-    
-    for pos in range(len(A)-1):
-        pick = A[pos]
-        for i in range(pos+1 , len(A)):
-            if pick > A[i]:
-                (pick, A[i]) = (A[i], pick)        
-        A[pos] = pick
+    for i in range(0, len(A)-1):
+        for j in range(i, len(A)):
+            if A[i] > A[j]:
+                A[i], A[j] = A[j], A[i] 
 
 
 def insertion_sort(A):
