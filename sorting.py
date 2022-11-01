@@ -1,4 +1,38 @@
 ## Bubble sort algorithm.
+## Bubble Sort
+# Bubble which are now values moving to start for increasing sort order 
+def bubble_sort(A):
+    swap = True
+    for iter in range(len(A)):
+        if not swap:
+            return 
+        swap = False
+        for i in range(len(A) - iter - 1):
+            if A[i] > A[i+1]:
+                swap = True
+                A[i], A[i+1] = A[i + 1], A[i] 
+
+## Selection Sort       
+# array = sorted_part + unsorted_part
+def selection_sort(A):
+    for i in range(0, len(A)-1):
+        for j in range(i, len(A)):
+            if A[i] > A[j]:
+                A[i], A[j] = A[j], A[i] 
+                
+
+### Insertion sort
+## 
+def insertion_sort(A):
+	pass
+
+    
+
+
+A = [5,4,2,7,9,10]
+insertion_sort(A)
+print(A)
+
 
 def swap(A, x, y):
     # temp = A[x]

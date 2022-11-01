@@ -1,4 +1,7 @@
 # binary serach
+import site; print(site.getsitepackages())
+import pytest
+import numpy as np
 
 def binary_search(A, l, h, value):
     if l > h:
@@ -18,5 +21,5 @@ def binary_search(A, l, h, value):
 
 
 A = [1,2,3,5,6,7,8,9]
-
+print("Vikas")
 print(binary_search(A, 0, 7, 4))
